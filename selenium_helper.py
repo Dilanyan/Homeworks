@@ -1,5 +1,5 @@
 from time import sleep
-
+import pytest
 class Selenium_helper():
     """
         In this class collected all methods that will help to do something related to the selenium part of our project, for example:
@@ -22,7 +22,7 @@ class Selenium_helper():
             sleep(3)
             current_url = driver.current_url
             print("Current URL:", current_url)
-            assert "partners" in current_url
+            assert "https://www.armstqb.org/partners" in current_url
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
             driver.minimize_window()
