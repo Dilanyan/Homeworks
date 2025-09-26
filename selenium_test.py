@@ -9,9 +9,9 @@ driver = webdriver.Firefox()
 try:
     driver.get("https://demoqa.com/")
     driver.maximize_window()
-    elements_cards = driver.find_elements(By.CLASS_NAME, "card")
+    elements_cards = driver.find_element(By.XPATH, "//h5[text()='Elements']")
     sleep(2)
-    elements_cards[0].click()
+    elements_cards.click()
     elements_url = driver.current_url
     assert "elements" in elements_url
     element_button = driver.find_element(By.ID, 'item-4')
