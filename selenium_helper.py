@@ -44,7 +44,7 @@ class Selenium_helper():
     def message_assertion(driver, message_text):
         p_element = driver.find_element(By.CSS_SELECTOR, "p[id='message']")
         assert p_element.is_displayed()
-        assert p_element.text in message_text
+        assert p_element.text == message_text
 
     @staticmethod
     def click_checkbox(driver):
