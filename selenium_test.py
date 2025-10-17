@@ -1,12 +1,8 @@
 from time import sleep
-
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, \
-    ElementNotInteractableException
 
-driver = webdriver.Firefox()
-try:
+
+def test_selen(driver):
     radio_button_and_assertion_text = "[text()='Impressive']"
     driver.get("https://demoqa.com/")
     driver.maximize_window()
@@ -36,12 +32,3 @@ try:
     links = driver.find_elements(By.CSS_SELECTOR, "div[id='linkWrapper'] > p > a")
     for link in links:
         print(link.text)
-
-except (
-        NoSuchElementException,
-        ElementClickInterceptedException,
-        ElementNotInteractableException
-) as e:
-    print(f"----------> {e} <----------")
-finally:
-    driver.quit()
