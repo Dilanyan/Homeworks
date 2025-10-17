@@ -1,12 +1,7 @@
 from time import sleep
-
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, \
-    ElementNotInteractableException
 
-driver = webdriver.Firefox()
-try:
+def test_step1(driver):
     # Step 1
     driver.get("https://demoqa.com/frames")
     driver.maximize_window()
@@ -25,7 +20,7 @@ try:
     assert alert_window.text == "This alert appeared after 5 seconds"
     alert_window.accept()
 
-    # Step 2
+def test_step2(driver):
     driver.get("https://demoqa.com/browser-windows")
     main_window_handler = driver.current_window_handle
     el_h1 = driver.find_element(By.XPATH, "//div[@id = 'browserWindows'] / h1")
@@ -46,7 +41,7 @@ try:
     print(el_h1.text)
     assert el_h1.text == "Browser Windows"
 
-    # Step 3
+def test_step3(driver):
     driver.get("https://demoqa.com/browser-windows")
     main_window_handler = driver.current_window_handle
     el_h1 = driver.find_element(By.XPATH, "//div[@id = 'browserWindows'] / h1")
@@ -65,7 +60,7 @@ try:
     print(el_h1.text)
     assert el_h1.text == "Browser Windows"
 
-    # Step 4
+def test_step4(driver):
     driver.get("https://demoqa.com/frames")
     el_h1 = driver.find_element(By.XPATH, "//div[@id = 'framesWrapper'] / h1")
     print(el_h1.text)
@@ -90,8 +85,7 @@ try:
     assert el_h1.text == "Frames"
     print("Iframe task completed")
 
-
-    # Step 5
+def test_step5(driver):
     driver.get("https://demoqa.com/alerts")
     el_alert_button = driver.find_element(By.ID, "alertButton")
     el_alert_button.click()
@@ -112,14 +106,3 @@ try:
     el_confirm_result = driver.find_element(By.CSS_SELECTOR, "#confirmResult")
     print(el_confirm_result.text)
     assert el_confirm_result.text == "You selected Cancel"
-
-
-
-except (
-        NoSuchElementException,
-        ElementClickInterceptedException,
-        ElementNotInteractableException
-) as e:
-    print(f"----------> {e} <----------")
-finally:
-    driver.quit()
