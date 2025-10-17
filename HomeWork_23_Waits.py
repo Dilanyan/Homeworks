@@ -34,7 +34,7 @@ try:
     # Step 1
     driver.get("https://demoqa.com/dynamic-properties")
     driver.implicitly_wait(10)
-    el_button = driver.find_element(By.ID, "visibleAfter")
+    el_button = driver.find_element(By.ID, "enableAfter")
     el_button.click()
 
     # Step 2
@@ -42,11 +42,11 @@ try:
     el_button = driver.find_element(By.TAG_NAME, "button")
     el_button.click()
     wait = WebDriverWait(driver, 10)
-    # el_h4 = driver.find_element(By.XPATH, "//div[@id='finish']/h4")
+    el_h4 = driver.find_element(By.XPATH, "//div[@id='finish']/h4")
     # el_text = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@id='finish']/h4")))
-    # el_text1 = wait.until(EC.visibility_of(el_h4))
-    el_text2 = wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@id='finish']/h4"), "Hello World!"))
-    print(el_text2)
+    el_text1 = wait.until(EC.visibility_of(el_h4))
+    # el_text2 = wait.until(EC.text_to_be_present_in_element((By.XPATH, "//div[@id='finish']/h4"), "Hello World!"))
+    print(el_text1.text)
     # assert el_text == "Hello World!"
 
     # Step 3
