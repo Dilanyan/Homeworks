@@ -1,36 +1,7 @@
 import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, \
-    ElementNotInteractableException, TimeoutException
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-
-def get_driver(browser="chrome"):
-    if browser.lower() == "chrome":
-        options = Options()
-        options.add_argument("--start-maximized")
-        options.add_argument("--disable-notifications")
-        options.add_argument("--incognito")
-        # options.add_argument("user-data-dir=C:\\Users\\Narek\\AppData\\Local\\Google\\Chrome\\User Data")
-        # options.add_argument("profile-directory=Profile 2")
-        return webdriver.Chrome(options=options)
-    if browser.lower() == "firefox":
-        return webdriver.Firefox()
-    if browser.lower() == "edge":
-        return webdriver.Edge()
-    if browser.lower() == "safari":
-        return webdriver.Safari()
-    else:
-        raise ValueError(f"Unsupported browser: {browser}")
-
-@pytest.fixture()
-def driver():
-    driver = get_driver(browser="chrome")
-    yield driver
-    driver.quit()
 
 
 @pytest.mark.sa
@@ -43,8 +14,8 @@ def test_step_1(driver):
 
 @pytest.mark.sb
 @pytest.mark.regression
-def test_step_2(driver):
-    driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+def test_step_2(driver, base_url):
+    driver.get(base_url + "/dynamic_loading/1")
     el_button = driver.find_element(By.TAG_NAME, "button")
     el_button.click()
     wait = WebDriverWait(driver, 10)
@@ -57,8 +28,8 @@ def test_step_2(driver):
 
 @pytest.mark.sc
 @pytest.mark.regression
-def test_step_3(driver):
-    driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+def test_step_3(driver, base_url):
+    driver.get(base_url + "/javascript_alerts")
     wait = WebDriverWait(driver, 10)
     el_button = driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']")
     wait_el_button = wait.until(EC.visibility_of(el_button))
@@ -76,4 +47,5 @@ def test_step_3(driver):
 def test_step_4(driver):
     driver.get("https://demoqa.com/automation-practice-form")
     el_ghost = driver.find_element(By.XPATH, "//button[text()='Ghost']")
+
 
