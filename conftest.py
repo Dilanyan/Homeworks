@@ -2,7 +2,6 @@
 import pytest
 from selenium import webdriver
 
-
 def get_driver(browser="chrome"):
     if browser.lower() == "chrome":
         from selenium.webdriver.chrome.options import Options
@@ -34,8 +33,6 @@ def driver(request):
     yield driver
     print("[Teardown] Closing browser...")
     driver.quit()
-
-
 
 @pytest.fixture(scope="session")
 def base_url():
