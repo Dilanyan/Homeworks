@@ -14,6 +14,13 @@ class BasePage:
     def click(self, locator):
         self.wait.until(EC.element_to_be_clickable(locator)).click()
 
+    def is_clickable(self, locator, timeout=10):
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+            return True
+        except TimeoutException:
+            return False
+
     def type(self, locator, text):
         element = self.wait.until(EC.visibility_of_element_located(locator))
         element.clear()
@@ -35,3 +42,13 @@ class BasePage:
             return True
         except TimeoutException:
             return False
+
+    def alert(self):
+        return self.wait.until(EC.alert_is_present())
+
+
+    # def get_alert_text(self):
+    #     return self.alert().text
+
+    # def accept_alert(self):
+    #     self.alert().accept()
