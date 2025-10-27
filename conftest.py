@@ -69,7 +69,13 @@ def base_url():
     # ("tnt", "A1b@cD3e", True),
     # ("validName", "wrongPassword", True),
     # ("wrongName", "validPassword", False),
-    ("wrongName", "wrongPassword", False),
+    ("wrongName", "wrongPassword", True),
 ])
 def credentials(request):
     return request.param
+
+@pytest.fixture(autouse=True)
+def add_screen_shot_on_fail(request, driver):
+    yield
+    if request.node.rep_call.failed:
+        driver.save_screenshot(f"{request.node.name}_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")

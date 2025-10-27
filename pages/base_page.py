@@ -45,10 +45,3 @@ class BasePage:
 
     def alert(self):
         return self.wait.until(EC.alert_is_present())
-
-
-    # def get_alert_text(self):
-    #     return self.alert().text
-
-    # def accept_alert(self):
-    #     self.alert().accept()
